@@ -44,8 +44,9 @@ impl Lexer {
       .chars()
       .filter(|c| !c.is_ascii_whitespace())
       .map(|c| match c {
-        '0'..='9' | 'a'..='z' | 'A'..='Z' => Token::Atom(c),
-        _ => Token::Op(c),
+        '0'..='9' => Token::Atom(c),
+        '+' | '-' | '*' | '/' => Token::Op(c),
+        _ => panic!("Syntax error"),
       })
       .collect();
 
